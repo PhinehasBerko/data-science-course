@@ -38,7 +38,7 @@ This makes the cell behave as a terminal to accept cmd commands
 
 For example: head poland-bankruptcy-data-2009.json
 
-## NB:
+#### NB:
 
 It's important to note that JSON is not exactly the same as a dictionary,
 but a lot of the same concepts apply
@@ -66,3 +66,19 @@ dataset = json.load(read_file)
     dataFrm = pd.dataFrame().from_dict(dataset["data"]).set_index("company_id")
 
     return dataFrm
+
+## Explore
+
+### To inspect the dataset we use the .info() method to:
+
+### 1. check which features there are in the dataset and their data types.
+
+### 2. What could / is the target variable.
+
+### 3. Are there missing values in the dataset.
+
+As always, it's a good idea to do some visualizations to see if there
+are any interesting trends or ideas we should keep in mind while we work
+
+To begin with, bar chart (plots) helps us to know the various classes
+(categories) within a particular variable (column).
