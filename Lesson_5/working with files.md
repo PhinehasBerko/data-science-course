@@ -66,36 +66,3 @@ dataset = json.load(read_file)
     dataFrm = pd.dataFrame().from_dict(dataset["data"]).set_index("company_id")
 
     return dataFrm
-
-## Explore
-
-### To inspect the dataset we use the .info() method to:
-
-### 1. check which features there are in the dataset and their data types.
-
-### 2. What could / is the target variable.
-
-### 3. Are there missing values in the dataset.
-
-As always, it's a good idea to do some visualizations to see if there
-are any interesting trends or ideas we should keep in mind while we work
-
-To begin with, bar chart (plots) helps us to know the various classes
-(categories) within a particular variable (column).
-
-To explore the distributions of features, boxplot is a help means
-
-When a feature in a dataset is skewed, it is important to keep in mind
-the type of model to use
-
-Another important consideration for model selection is whether there are any issues with multicollinearity in our model
-
-Multicollinearity in statistics refers to a situation where two or more predictor variables in a regression model are highly correlated with each
-
-### It is important to know that "good" accuracy scores don't tell us much about the model's performance when dealing with imbalanced data
-
-let's see how its predictions differ for the two classes in the dataset.
-
-### Confusion Matrix
-
-A confusion matrix is a table that summarizes the performance of a classification model by comparing its predicted labels to the true labels. It visualizes the counts of true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN). This table is crucial for understanding where a model gets confused and making informed decisions about model optimization
