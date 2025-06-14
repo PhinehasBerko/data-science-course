@@ -63,6 +63,6 @@ with gzip.open(filename) as read_file:
 dataset = json.load(read_file)
 
     #Transform data into a data frame
-    dataFrm = pd.dataFrame().from_dict(dataset["data"]).set_index("company_id")
+    dataFrm = pd.DataFrame().from_dict(dataset["data"]).set_index("company_id")
 
     return dataFrm
