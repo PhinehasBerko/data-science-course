@@ -32,3 +32,18 @@ from sklearn.impute import SimpleImputer
 from sklearn.metrics import ConfusionMetricDisplay
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 from sklearn.pipeline import make_pipeline
+
+### Split > dataset into features vs target and train_set vs test_set
+
+target = "bankrupt"
+X = df.drop(columns= "bankrupt")
+y = df[target]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 1, test_size = 0.2)
+
+### Resample > refers to the process of creating new samples or data points based on existing ones
+
+we do this on the train data and not the test
+
+over_sampler = RandomOverSampler(random_state = 42)
+X_train_over, y_train_over = over_sampler.fit_resample(X_train, y_train)
