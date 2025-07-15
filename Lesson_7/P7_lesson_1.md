@@ -87,7 +87,8 @@ result = ds_app.aggregate(
 [
 {
 "$group":{
-"_id":"$countryISO2", "count": {"$count":{}}
+"_id":"$countryISO2",
+"count": {"$count":{}}
 }
 }
 ]
@@ -98,3 +99,41 @@ Task 7.1.8: Put your results from the previous task into a DataFrame named df_na
 df_nationality = (
 pd.DataFrame(result).rename({"\_id":"country_iso2"},axis= "columns").sort_values("count")
 )
+
+#### Instantiate a CountryConverter object named cc, and then use it to add a "country_name" column to the DataFrame df_nationality
+
+cc = CountryConverter()
+df_nationality["country_name"] = cc.convert(
+df_nationality["country_iso2"], to = "name_short"
+)
+
+Task 7.1.10: Create a horizontal bar chart of the 10 countries with the largest representation in df_nationality. Be sure to label your x-axis "Frequency [count]", your y-axis "Country", and use the title "DS Applicants by Country"
+
+fig = px.bar(
+data_frame = df_nationality.tail(10),
+x = "count",
+y = "country_name",
+orientation = 'h',
+title = "DS Applicants by Country"
+
+)
+
+fig.update(xaxis_title = "Frequency [count]", yaxis_title = "Country")
+fig.show()
+
+Task 7.1.13: Add a column named "country_iso3" to df_nationality. It should contain the 3-letter ISO abbreviation for each country in "country_iso2".
+
+df_nationality["country_iso3] = cc.convert(df_nationality["country_iso2], to = "ISO3")
+
+Task 7.1.14: Create a function build_nat_choropleth that returns plotly choropleth map showing the "count" of DS applicants in each country in the globe. Be sure to set your projection to "natural earth", and color_continuous_scale to px.colors.sequential.Oranges.
+
+def build_nat_choropleth():
+fig = px.choropleth(
+data_frame = df_nationality,
+locations = "country_iso3",
+color = "count_pct",
+projection = "natural earth",
+color_continuous_scale = px.colors.sequential.Oranges,
+title = "DS Applicants: Nationality"
+)
+return fig
