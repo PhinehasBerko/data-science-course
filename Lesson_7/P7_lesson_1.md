@@ -137,3 +137,43 @@ color_continuous_scale = px.colors.sequential.Oranges,
 title = "DS Applicants: Nationality"
 )
 return fig
+
+### Age
+
+How old are DS Lab applicants?
+
+We know the birthday of all our applicants, but we'll need to perform another aggregation to calculate their ages. We'll use the "$birthday" field and the "$$NOW" variable.
+
+Task 7.1.15: Use the aggregate method to calculate the age for each of the applicants in ds_app. Store the results in result.
+
+df_age = ds_app.aggregate(
+[
+{
+"$project":{
+"years":{
+"$dateDiff":{
+"startDate":"$birthday",
+"endDate" :"$$NOW",
+"unit": "year"
+}
+}
+}
+}
+]
+)
+
+Task 7.1.16: Read your result from the previous task into a DataFrame, and create a Series called ages.
+
+ages = pd.DataFrame(result)["years"]
+
+And finally, plot a histogram to show the distribution of ages.
+
+Task 7.1.17: Create function build_age_hist that returns a plotly histogram of ages. Be sure to label your x-axis "Age", your y-axis "Frequency [count]", and use the title "Distribution of DS Applicant Ages".
+
+def build_age_hist(): # Create histogram of `ages`
+fig = px.histogram(x = ages, nbins = 20, title = "DS Applicants: Distribution of Ages") # Set axis labels
+fig.update_layout(xaxis_title = "Age", yaxis_title = "Frequency [count]")
+
+    return fig
+
+age_fig = build_age_hist()
